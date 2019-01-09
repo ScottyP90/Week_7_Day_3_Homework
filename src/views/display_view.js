@@ -15,23 +15,21 @@ DisplayView.prototype.render = function(country) {
   const container = document.querySelector('#country')
   container.innerHTML = '';
 
-  const countryName = document.createElement('h2')
-  countryName.textContent = country.name
+  const countryName = this.addElement('h2', country.name)
 
-  const countryRegion = document.createElement('h3')
-  countryRegion.textContent = country.region
+  const countryRegion = this.addElement('h3', `Location: ${country.region}`)
+
+  const listOfLanguages = this.addElement('h3', 'List of languages:')
 
   const countryFlag = document.createElement('img')
   countryFlag.src = country.flag
 
-
-  const list = this.createList(country.languages)
-
-
+  const list = this.createLangugeList(country.languages)
 
   container.appendChild(countryName)
   container.appendChild(countryRegion)
   container.appendChild(countryFlag)
+  container.appendChild(listOfLanguages)
   container.appendChild(list)
 }
 
@@ -41,13 +39,13 @@ DisplayView.prototype.addElement = function(type, text){
   return element;
 }
 
-DisplayView.prototype.createList = function(countries) {
-    const list = document.createElement('ul');
-    countries.forEach((country) => {
-      const listItem = this.addElement('li', country);
-    list.appendChild(listItem);
-  });
-  return list
+DisplayView.prototype.createLangugeList = function(languages) {
+  const list = document.createElement('ul');
+  languages.forEach((language) => {
+    const listItem = this.addElement('li', language.name);
+  list.appendChild(listItem);
+});
+return list
 }
 
 module.exports = DisplayView;
